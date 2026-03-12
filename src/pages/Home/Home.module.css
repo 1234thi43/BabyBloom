@@ -1,0 +1,327 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.hero {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Liquid Glass: матовое стекло с бликом и лёгкой динамикой */
+@keyframes glassGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.08),
+      0 0 0 1px rgba(255, 255, 255, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(255, 255, 255, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+}
+
+@keyframes glassShine {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+.heroGlass {
+  width: 100%;
+  max-width: 100%;
+  padding: 6px;
+  border-radius: 24px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(250, 247, 244, 0.2) 100%
+  );
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: glassGlow 6s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroGlass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: glassShine 5s ease-in-out infinite;
+}
+
+.heroGlass:hover {
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.heroTitle {
+  margin: 0 0 6px;
+  font-size: 26px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #3d3530;
+}
+
+.heroLine {
+  width: 360px;
+  height: 2px;
+  margin: 0 0 6px;
+  background: linear-gradient(90deg, transparent, #c9a882, transparent);
+  border: none;
+  border-radius: 1px;
+  transform-origin: center;
+}
+
+.heroSubtitle {
+  margin: 0 0 6px;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #8c7b6e;
+}
+
+/* Картинка: ширина 85%, высота 90% от опорной (50vh → 45vh) */
+.heroImageWrap {
+  width: 85%;
+  height: 45vh;
+  max-height: 360px;
+  margin: 6px auto;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
+  border-radius: 20px;
+  transition: transform 0.6s ease;
+}
+
+.heroGlass:hover .heroImage {
+  transform: scale(1.04);
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.heroButtonPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 168, 130, 0.6);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  color: #3d3530;
+  background: linear-gradient(135deg, #f5efe6 0%, #e8ddd0 45%, #c9a882 100%);
+  box-shadow: 0 12px 28px rgba(201, 168, 130, 0.4);
+  transition:
+    transform 150ms ease-out,
+    box-shadow 150ms ease-out,
+    filter 150ms ease-out;
+}
+
+.heroButtonPrimary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 18px 36px rgba(201, 168, 130, 0.55);
+  filter: brightness(1.04);
+}
+
+.heroButtonGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  color: #3d3530;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    background 160ms ease-out,
+    transform 160ms ease-out,
+    box-shadow 160ms ease-out;
+}
+
+.heroButtonGhost:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+}
+
+.portfolioSection {
+  scroll-margin-top: 72px;
+}
+
+.portfolioTitle {
+  margin: 0 0 12px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #1c1b1f;
+}
+
+.portfolioText {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #5b5b5b;
+}
+
+@media (min-width: 768px) {
+  .page {
+    gap: 64px;
+  }
+
+  .heroGlass {
+    padding: 7px;
+    border-radius: 28px;
+  }
+
+  .heroTitle {
+    margin: 0 0 7px;
+    font-size: 34px;
+  }
+
+  .heroLine {
+    margin: 0 0 7px;
+  }
+
+  .heroSubtitle {
+    margin: 0 0 7px;
+    font-size: 17px;
+  }
+
+  .heroImageWrap {
+    max-height: 420px;
+    margin: 7px auto;
+  }
+
+  .heroActions {
+    margin: 14px 0;
+    gap: 20px;
+  }
+
+  .heroButtonPrimary {
+    padding: 14px 26px;
+    font-size: 16px;
+  }
+
+  .portfolioSection {
+    scroll-margin-top: 80px;
+  }
+
+  .portfolioTitle {
+    margin: 0 0 14px;
+    font-size: 26px;
+  }
+
+  .portfolioText {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page {
+    gap: 80px;
+  }
+
+  .heroGlass {
+    padding: 8px;
+    border-radius: 32px;
+  }
+
+  .heroTitle {
+    margin: 0 0 8px;
+    font-size: 40px;
+  }
+
+  .heroLine {
+    margin: 0 0 8px;
+  }
+
+  .heroSubtitle {
+    margin: 0 0 8px;
+    font-size: 18px;
+  }
+
+  .heroImageWrap {
+    height: 54vh;
+    max-height: 576px;
+    margin: 8px auto;
+  }
+
+  .heroActions {
+    margin: 16px 0;
+    gap: 20px;
+  }
+
+  .portfolioTitle {
+    margin: 0 0 16px;
+    font-size: 28px;
+  }
+}
