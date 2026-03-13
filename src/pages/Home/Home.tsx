@@ -1,12 +1,24 @@
 import type { FC } from 'react'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import GalleryPreview from '../../components/sections/GalleryPreview'
 import styles from './Home.module.css'
+
+const statsItems = [
+  { value: '500+', label: 'Съёмок проведено' },
+  { value: '8', label: 'Лет опыта' },
+  { value: '100%', label: 'Довольных семей' },
+] as const
 
 const Home: FC = () => {
   const heroRef = useRef<HTMLElement | null>(null)
+  const statsRef = useRef<HTMLElement | null>(null)
   const isHeroInView = useInView(heroRef, {
     amount: 0.4,
+    once: true,
+  })
+  const isStatsInView = useInView(statsRef, {
+    amount: 0.5,
     once: true,
   })
 
@@ -92,17 +104,33 @@ const Home: FC = () => {
       </section>
 
       <section
-        id="portfolio"
-        className={styles.portfolioSection}
+        ref={statsRef}
+        className={styles.statsStrip}
+        aria-label="Наши достижения"
       >
-        <h2 className={styles.portfolioTitle}>
-          Портфолио
-        </h2>
-        <p className={styles.portfolioText}>
-          Здесь в будущем появятся лучшие кадры с наших съёмок новорождённых,
-          беременных и семейных фотосессий.
-        </p>
+        <div className={styles.statsStripInner}>
+          {statsItems.map((item, index) => (
+            <motion.div
+              key={item.label}
+              className={styles.statsCard}
+              initial={{ opacity: 0, y: 16 }}
+              animate={
+                isStatsInView ? { opacity: 1, y: 0 } : undefined
+              }
+              transition={{
+                duration: 0.5,
+                ease: [0.16, 1, 0.3, 1],
+                delay: index * 0.1,
+              }}
+            >
+              <span className={styles.statsNumber}>{item.value}</span>
+              <span className={styles.statsLabel}>{item.label}</span>
+            </motion.div>
+          ))}
+        </div>
       </section>
+
+      <GalleryPreview />
     </div>
   )
 }

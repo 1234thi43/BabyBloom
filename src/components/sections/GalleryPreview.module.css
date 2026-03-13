@@ -1,0 +1,310 @@
+/* Секция "Избранные работы" — Liquid Glass, дизайн-система из .cursor/rules */
+
+.section {
+  scroll-margin-top: 72px;
+  width: 100%;
+}
+
+.inner {
+  max-width: var(--container-max, 1200px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.label {
+  margin: 0;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8c7b6e;
+}
+
+.headingBlock {
+  text-align: center;
+  margin: 0 0 8px;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #3d3530;
+  line-height: 1.2;
+}
+
+.subtitle {
+  margin: 0;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #8c7b6e;
+}
+
+/* Обёртка сетки + кнопка «Показать ещё» (мобильная) */
+.gridWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 20px;
+}
+
+.gridWrapper .grid {
+  margin: 0;
+}
+
+/* На телефонах: скрыть фото 3–6 до нажатия «Показать ещё» */
+@media (max-width: 767px) {
+  .gridWrapper:not(.gridWrapperExpanded) .grid .cell:nth-child(n + 3) {
+    display: none;
+  }
+}
+
+/* Кнопка «Показать ещё» — только на мобильных, скрыть после раскрытия */
+.expandTrigger {
+  display: none;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #3d3530;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.4s ease;
+  min-height: var(--touch-min, 44px);
+}
+
+.expandTrigger:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(201, 168, 130, 0.5);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 767px) {
+  .expandTrigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gridWrapperExpanded .expandTrigger {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .gridWrapper {
+    margin: 0 0 28px;
+  }
+}
+
+/* Bento Grid: мобильная — одна колонка, компактные ячейки */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  width: 100%;
+  margin: 0 0 20px;
+}
+
+.cell {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #e8ddd0;
+  min-height: 200px;
+  transition: transform 0.4s ease;
+}
+
+.cell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  border-radius: inherit;
+  transition: background 0.4s ease;
+  pointer-events: none;
+}
+
+.cell:hover {
+  transform: scale(1.05);
+}
+
+.cell:hover::after {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.cellImage {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.cellPlaceholder {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  background: #e8ddd0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8c7b6e;
+  font-size: 14px;
+}
+
+/* Bento: десктопная раскладка */
+.cell1 {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.cell2 {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.cell3 {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.cell4 {
+  grid-column: 1;
+  grid-row: 4;
+}
+
+.cell5 {
+  grid-column: 1;
+  grid-row: 5;
+}
+
+.cell6 {
+  grid-column: 1;
+  grid-row: 6;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #3d3530;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  transition: all 0.4s ease;
+}
+
+.pill:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(201, 168, 130, 0.5);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  color: #3d3530;
+}
+
+@media (min-width: 768px) {
+  .section {
+    scroll-margin-top: 80px;
+  }
+
+  .grid {
+    gap: 12px;
+    margin: 0 0 28px;
+  }
+
+  .inner {
+    gap: 24px;
+  }
+
+  .title {
+    font-size: 26px;
+    margin: 0 0 10px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .grid {
+    margin: 0 0 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gridWrapper {
+    margin: 0 0 32px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    min-height: 480px;
+    margin: 0;
+  }
+
+  .cell {
+    min-height: 200px;
+  }
+
+  .cellImage,
+  .cellPlaceholder {
+    min-height: 200px;
+  }
+
+  .cell1 {
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+  }
+
+  .cell2 {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+  }
+
+  .cell3 {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+  }
+
+  .cell4 {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+  }
+
+  .cell5 {
+    grid-column: 2 / 4;
+    grid-row: 3 / 5;
+  }
+
+  .cell6 {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+  }
+
+  .title {
+    font-size: 28px;
+    margin: 0 0 12px;
+  }
+}

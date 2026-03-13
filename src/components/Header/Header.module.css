@@ -50,6 +50,11 @@
 }
 
 @media (max-width: 767px) {
+  .header {
+    position: relative;
+    z-index: 9999;
+  }
+
   .logo {
     position: relative;
     z-index: 101;
@@ -61,6 +66,12 @@
   gap: 16px;
   font-size: 14px;
   opacity: 0.8;
+}
+
+@media (max-width: 767px) {
+  .navDesktop {
+    display: none;
+  }
 }
 
 .navLink {
@@ -123,53 +134,67 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Мобильное меню */
+/* Мобильное меню (оверлей рендерится в body через портал — не привязан к header) */
+.navOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 24px;
+  padding: 72px 24px 32px;
+  font-size: 18px;
+  opacity: 1;
+  transform: translateX(100%);
+  transition: transform 0.3s ease, visibility 0.3s ease;
+  visibility: hidden;
+  pointer-events: none;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(250, 247, 244, 0.98) 50%,
+    rgba(245, 239, 230, 0.96) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.12);
+}
+
+.navOverlay.navOpen {
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@media (min-width: 768px) {
+  .navOverlay {
+    display: none;
+  }
+}
+
 @media (max-width: 767px) {
   .burger {
     display: flex;
     position: relative;
-    z-index: 101;
+    z-index: 9999;
   }
 
-  .nav {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.25) 0%,
-      rgba(245, 239, 230, 0.2) 50%,
-      rgba(250, 247, 244, 0.15) 100%
-    );
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-left: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.08);
-    padding: 60px 24px 24px;
-    font-size: 18px;
-    opacity: 1;
-    transform: translateX(100%);
-    transition: transform 0.3s ease, visibility 0.3s ease;
-    visibility: hidden;
-  }
-
-  .navOpen {
-    transform: translateX(0);
-    visibility: visible;
-  }
-
-  .navLink {
+  .navOverlay .navLink {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
     padding: 8px 16px;
+    flex-shrink: 0;
   }
 }
 

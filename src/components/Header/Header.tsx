@@ -1,6 +1,27 @@
-import { type FC, useState, useCallback } from 'react'
+import { type FC, useState, useCallback, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { NavLink } from 'react-router-dom'
 import styles from './Header.module.css'
+
+const navLinkClass = ({ isActive }: { isActive: boolean }, base: string) =>
+  isActive ? `${base} ${styles.navLinkActive}` : base
+
+const MenuLinks: FC<{ onNavigate: () => void }> = ({ onNavigate }) => (
+  <>
+    <NavLink to="/" className={(opt) => navLinkClass(opt, styles.navLink)} onClick={onNavigate}>
+      Главная
+    </NavLink>
+    <NavLink to="/portfolio" className={(opt) => navLinkClass(opt, styles.navLink)} onClick={onNavigate}>
+      Портфолио
+    </NavLink>
+    <NavLink to="/info" className={(opt) => navLinkClass(opt, styles.navLink)} onClick={onNavigate}>
+      Инфо
+    </NavLink>
+    <NavLink to="/contacts" className={(opt) => navLinkClass(opt, styles.navLink)} onClick={onNavigate}>
+      Контакты
+    </NavLink>
+  </>
+)
 
 const LogoIcon: FC = () => (
   <svg
@@ -23,6 +44,17 @@ const Header: FC = () => {
 
   const closeMenu = useCallback(() => setMenuOpen(false), [])
 
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen])
+
   return (
     <header className={styles.header}>
       <div className={styles.headerInner}>
@@ -41,52 +73,18 @@ const Header: FC = () => {
           <span className={styles.burgerLine} />
           <span className={styles.burgerLine} />
         </button>
-        <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`} aria-hidden={!menuOpen}>
-          <NavLink
-            to="/"
-            className={({ isActive }: { isActive: boolean }) =>
-              isActive
-                ? `${styles.navLink} ${styles.navLinkActive}`
-                : styles.navLink
-            }
-            onClick={closeMenu}
-          >
-            Главная
-          </NavLink>
-          <NavLink
-            to="/portfolio"
-            className={({ isActive }: { isActive: boolean }) =>
-              isActive
-                ? `${styles.navLink} ${styles.navLinkActive}`
-                : styles.navLink
-            }
-            onClick={closeMenu}
-          >
-            Портфолио
-          </NavLink>
-          <NavLink
-            to="/info"
-            className={({ isActive }: { isActive: boolean }) =>
-              isActive
-                ? `${styles.navLink} ${styles.navLinkActive}`
-                : styles.navLink
-            }
-            onClick={closeMenu}
-          >
-            Инфо
-          </NavLink>
-          <NavLink
-            to="/contacts"
-            className={({ isActive }: { isActive: boolean }) =>
-              isActive
-                ? `${styles.navLink} ${styles.navLinkActive}`
-                : styles.navLink
-            }
-            onClick={closeMenu}
-          >
-            Контакты
-          </NavLink>
+        <nav className={`${styles.nav} ${styles.navDesktop}`} aria-hidden={false}>
+          <MenuLinks onNavigate={closeMenu} />
         </nav>
+        {createPortal(
+          <nav
+            className={`${styles.navOverlay} ${menuOpen ? styles.navOpen : ''}`}
+            aria-hidden={!menuOpen}
+          >
+            <MenuLinks onNavigate={closeMenu} />
+          </nav>,
+          document.body
+        )}
       </div>
     </header>
   )

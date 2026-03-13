@@ -213,28 +213,92 @@
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
 }
 
-.portfolioSection {
-  scroll-margin-top: 72px;
+/* Блок статистики: горизонтальная полоса, 3 карточки со стеклом */
+.statsStrip {
+  width: 100%;
+  padding: 20px 14px;
 }
 
-.portfolioTitle {
-  margin: 0 0 12px;
-  font-size: 22px;
+.statsStripInner {
+  width: 80%;
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.statsCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px;
+  border-top: 1px solid rgba(201, 168, 130, 0.25);
+}
+
+.statsCard:first-child {
+  border-top: none;
+}
+
+.statsNumber {
+  display: block;
+  font-size: 36px;
   font-weight: 700;
-  letter-spacing: 0.3px;
-  color: #1c1b1f;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: #c9a882;
+  margin-bottom: 6px;
 }
 
-.portfolioText {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.6;
-  color: #5b5b5b;
+.statsLabel {
+  font-size: 13px;
+  line-height: 1.35;
+  color: #8c7b6e;
+  letter-spacing: 0.02em;
 }
 
 @media (min-width: 768px) {
   .page {
     gap: 64px;
+  }
+
+  .statsStrip {
+    padding: 24px 20px;
+  }
+
+  .statsStripInner {
+    width: 100%;
+    flex-direction: row;
+    border-radius: 28px;
+  }
+
+  .statsCard {
+    border-top: none;
+    border-left: 1px solid rgba(201, 168, 130, 0.25);
+    padding: 32px 24px;
+  }
+
+  .statsCard:first-child {
+    border-left: none;
+  }
+
+  .statsNumber {
+    font-size: 42px;
+    margin-bottom: 8px;
+  }
+
+  .statsLabel {
+    font-size: 14px;
   }
 
   .heroGlass {
@@ -271,23 +335,33 @@
     font-size: 16px;
   }
 
-  .portfolioSection {
-    scroll-margin-top: 80px;
-  }
-
-  .portfolioTitle {
-    margin: 0 0 14px;
-    font-size: 26px;
-  }
-
-  .portfolioText {
-    font-size: 16px;
-  }
 }
 
 @media (min-width: 1024px) {
   .page {
     gap: 80px;
+  }
+
+  .statsStrip {
+    padding: 27px;
+  }
+
+  .statsStripInner {
+    max-width: 1000px;
+    border-radius: 32px;
+  }
+
+  .statsCard {
+    padding: 40px 32px;
+  }
+
+  .statsNumber {
+    font-size: 48px;
+    margin-bottom: 10px;
+  }
+
+  .statsLabel {
+    font-size: 15px;
   }
 
   .heroGlass {
@@ -320,8 +394,4 @@
     gap: 20px;
   }
 
-  .portfolioTitle {
-    margin: 0 0 16px;
-    font-size: 28px;
-  }
 }
