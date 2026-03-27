@@ -31,16 +31,16 @@
   align-items: center;
   gap: 10px;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 22px;
   color: #3d3530;
   min-height: 0;
 }
 
 .logoIcon {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  max-height: 36px;
+  width: calc(36px * 2.5);
+  height: calc(36px * 2.5);
+  max-height: calc(36px * 2.5);
   object-fit: contain;
   display: block;
 }
@@ -64,7 +64,7 @@
 .nav {
   display: flex;
   gap: 16px;
-  font-size: 14px;
+  font-size: 18px;
   opacity: 0.8;
 }
 
@@ -99,14 +99,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
-  width: 44px;
-  height: 44px;
+  gap: calc(5px * 1.15);
+  width: calc(44px * 1.15);
+  height: calc(44px * 1.15);
   padding: 0;
   border: none;
   background: transparent;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: calc(8px * 1.15);
   transition: background-color 0.2s ease;
 }
 
@@ -115,15 +115,15 @@
 }
 
 .burgerLine {
-  width: 22px;
-  height: 2px;
+  width: calc(22px * 1.15);
+  height: calc(2px * 1.15);
   background-color: #3d3530;
-  border-radius: 1px;
+  border-radius: calc(1px * 1.15);
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .burgerOpen .burgerLine:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+  transform: translateY(calc(7px * 1.15)) rotate(45deg);
 }
 
 .burgerOpen .burgerLine:nth-child(2) {
@@ -131,7 +131,7 @@
 }
 
 .burgerOpen .burgerLine:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+  transform: translateY(calc(-7px * 1.15)) rotate(-45deg);
 }
 
 /* Мобильное меню (оверлей рендерится в body через портал — не привязан к header) */
@@ -210,7 +210,7 @@
   }
 
   .logo {
-    font-size: 20px;
+    font-size: 24px;
   }
 }
 

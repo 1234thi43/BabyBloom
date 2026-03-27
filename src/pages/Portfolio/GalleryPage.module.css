@@ -1,0 +1,103 @@
+.title {
+  margin: 0 0 20px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #3d3530;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.empty {
+  text-align: center;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  color: #8c7b6e;
+  padding: 40px 0;
+}
+
+.masonry {
+  columns: 2;
+  column-gap: 10px;
+  width: 100%;
+}
+
+.item {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0 0 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  break-inside: avoid;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.item:focus-visible {
+  outline: 2px solid #c9a882;
+  outline-offset: 2px;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.placeholder {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: #e8ddd0;
+  border-radius: 16px;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 24px;
+    margin: 0 0 24px;
+  }
+
+  .masonry {
+    columns: 3;
+    column-gap: 14px;
+  }
+
+  .item {
+    margin: 0 0 14px;
+    border-radius: 20px;
+  }
+
+  .image {
+    border-radius: 20px;
+  }
+
+  .placeholder {
+    border-radius: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: 26px;
+    margin: 0 0 28px;
+  }
+
+  .masonry {
+    columns: 4;
+    column-gap: 16px;
+  }
+
+  .item {
+    margin: 0 0 16px;
+  }
+}

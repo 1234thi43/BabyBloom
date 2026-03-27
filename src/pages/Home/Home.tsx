@@ -10,15 +10,83 @@ const statsItems = [
   { value: '100%', label: 'Довольных семей' },
 ] as const
 
+const STUDIO_FEATURES = [
+  {
+    id: 'comfort',
+    title: 'Комфорт и безопасность',
+    description:
+      'Тёплая температура, стерильные текстили и продуманные позы — малыш всегда в надёжных руках.',
+  },
+  {
+    id: 'light',
+    title: 'Профессиональный свет',
+    description:
+      'Мягкий студийный свет и большие окна создают естественные оттенки кожи без резких теней.',
+  },
+  {
+    id: 'props',
+    title: 'Большой выбор реквизита',
+    description:
+      'Коллекция пледов, корзинок, фонов и аксессуаров, которые подбираются под вашу историю и стиль.',
+  },
+  {
+    id: 'family',
+    title: 'Простор для семьи',
+    description:
+      'Удобная зона ожидания, место для переодевания и совместных кадров с родителями и старшими детьми.',
+  },
+] as const
+
+const servicePacks = [
+  {
+    id: 'cocoon',
+    title: 'КОКОН',
+    price: '220 бел. руб.',
+    description: 'Короткая уютная съёмка в образе «кокон» — нежные кадры новорождённого в пелёнках и шапочках. Идеально для первых воспоминаний.',
+    image: '/images/price/cocoon.webp',
+  },
+  {
+    id: 'mini-plus',
+    title: 'МИНИ +',
+    price: '300 бел. руб.',
+    description: 'Расширенный мини-пакет: несколько образов, работа с реквизитом и мягким светом. Больше кадров и эмоций в одной съёмке.',
+    image: '/images/price/mini-plus.webp',
+  },
+  {
+    id: 'standard',
+    title: 'СТАНДАРТ',
+    price: '400 бел. руб.',
+    description: 'Полноценная студийная съёмка с несколькими сетами, смена образов и реквизита. Подходит для создания целой серии кадров.',
+    image: '/images/price/standard.webp',
+  },
+  {
+    id: 'premium',
+    title: 'ПРЕМИУМ',
+    price: '550 бел. руб.',
+    description: 'Максимальный пакет: продолжительная съёмка, все образы и локации студии, приоритетная обработка и расширенная галерея.',
+    image: '/images/price/premium.webp',
+  },
+] as const
+
 const Home: FC = () => {
   const heroRef = useRef<HTMLElement | null>(null)
   const statsRef = useRef<HTMLElement | null>(null)
+  const studioRef = useRef<HTMLElement | null>(null)
+  const servicesRef = useRef<HTMLElement | null>(null)
   const isHeroInView = useInView(heroRef, {
     amount: 0.4,
     once: true,
   })
   const isStatsInView = useInView(statsRef, {
     amount: 0.5,
+    once: true,
+  })
+  const isStudioInView = useInView(studioRef, {
+    amount: 0.4,
+    once: true,
+  })
+  const isServicesInView = useInView(servicesRef, {
+    amount: 0.2,
     once: true,
   })
 
@@ -76,7 +144,7 @@ const Home: FC = () => {
 
           <div className={styles.heroImageWrap}>
             <motion.img
-              src="https://images.pexels.com/photos/3933272/pexels-photo-3933272.jpeg?auto=compress&cs=tinysrgb&w=1600"
+              src="/images/banner/banner.webp"
               alt="Новорожденный малыш в уютной студийной съёмке"
               loading="lazy"
               className={styles.heroImage}
@@ -103,11 +171,7 @@ const Home: FC = () => {
         </motion.div>
       </section>
 
-      <section
-        ref={statsRef}
-        className={styles.statsStrip}
-        aria-label="Наши достижения"
-      >
+      <section ref={statsRef} className={styles.statsStrip} aria-label="Наши достижения">
         <div className={styles.statsStripInner}>
           {statsItems.map((item, index) => (
             <motion.div
@@ -131,6 +195,118 @@ const Home: FC = () => {
       </section>
 
       <GalleryPreview />
+
+      <section
+        ref={studioRef}
+        className={styles.studioSection}
+        aria-labelledby="studio-title"
+      >
+        <motion.div
+          className={styles.studioGlass}
+          initial={{ opacity: 0, y: 24 }}
+          animate={isStudioInView ? { opacity: 1, y: 0 } : undefined}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className={styles.studioInner}>
+            <motion.header
+              className={styles.studioHeader}
+              initial={{ opacity: 0, y: 12 }}
+              animate={isStudioInView ? { opacity: 1, y: 0 } : undefined}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
+            >
+              <h2 id="studio-title" className={styles.studioTitle}>
+                Собственная фотостудия для самых важных моментов
+              </h2>
+              <p className={styles.studioIntro}>
+                Отдельное тёплое пространство, где всё создано для спокойной и безопасной съёмки малышей и семей.
+              </p>
+            </motion.header>
+
+            <ul className={styles.studioList} role="list">
+              {STUDIO_FEATURES.map((feature, index) => (
+                <motion.li
+                  key={feature.id}
+                  className={styles.studioItem}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={isStudioInView ? { opacity: 1, y: 0 } : undefined}
+                  transition={{
+                    duration: 0.45,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: 0.14 + index * 0.06,
+                  }}
+                >
+                  <h3 className={styles.studioItemTitle}>{feature.title}</h3>
+                  <p className={styles.studioItemText}>{feature.description}</p>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+        </motion.div>
+      </section>
+
+      <section
+        ref={servicesRef}
+        className={styles.servicesSection}
+        aria-labelledby="services-title"
+      >
+        <div className={styles.servicesInner}>
+          <motion.h2
+            id="services-title"
+            className={styles.servicesTitle}
+            initial={{ opacity: 0, y: 12 }}
+            animate={isServicesInView ? { opacity: 1, y: 0 } : undefined}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Виды съёмок
+          </motion.h2>
+          <motion.p
+            className={styles.servicesSubtitle}
+            initial={{ opacity: 0, y: 12 }}
+            animate={isServicesInView ? { opacity: 1, y: 0 } : undefined}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
+          >
+            Выберите пакет фотосессии под ваши желания и бюджет — от короткой съёмки «Кокон» до полноценного премиум-формата.
+          </motion.p>
+          <div className={styles.servicesGrid}>
+            {servicePacks.map((pack, index) => (
+              <motion.article
+                key={pack.id}
+                className={styles.serviceCard}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isServicesInView ? { opacity: 1, y: 0 } : undefined}
+                transition={{
+                  duration: 0.5,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: 0.12 + index * 0.08,
+                }}
+              >
+                <div className={styles.serviceCardImageWrap}>
+                  <img
+                    src={pack.image}
+                    alt={`Фотосессия: ${pack.title}`}
+                    loading="lazy"
+                    className={styles.serviceCardImage}
+                    onError={(e) => {
+                      const target = e.currentTarget
+                      if (target.dataset.fallback) return
+                      target.dataset.fallback = '1'
+                      target.src = 'https://images.pexels.com/photos/3933272/pexels-photo-3933272.jpeg?auto=compress&cs=tinysrgb&w=800'
+                    }}
+                  />
+                </div>
+                <div className={styles.serviceCardContent}>
+                  <h3 className={styles.serviceCardTitle}>{pack.title}</h3>
+                  <p className={styles.serviceCardPrice}>{pack.price}</p>
+                  <p className={styles.serviceCardDescription}>{pack.description}</p>
+                  <a href="/contacts" className={styles.serviceCardButton}>
+                    Записаться на съёмку
+                  </a>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

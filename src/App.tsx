@@ -3,7 +3,9 @@ import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import Home from './pages/Home/Home'
-import Portfolio from './pages/Portfolio/Portfolio'
+import PortfolioLayout from './pages/Portfolio/PortfolioLayout'
+import PortfolioIndex from './pages/Portfolio/PortfolioIndex'
+import GalleryPage from './pages/Portfolio/GalleryPage'
 import Info from './pages/Info/Info'
 import Contacts from './pages/Contacts/Contacts'
 
@@ -15,7 +17,10 @@ const App: FC = () => {
         <div className="appContainer">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/portfolio" element={<PortfolioLayout />}>
+              <Route index element={<PortfolioIndex />} />
+              <Route path=":category" element={<GalleryPage />} />
+            </Route>
             <Route path="/info" element={<Info />} />
             <Route path="/contacts" element={<Contacts />} />
           </Routes>

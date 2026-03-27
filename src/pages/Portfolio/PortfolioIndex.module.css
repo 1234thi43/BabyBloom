@@ -1,0 +1,145 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  display: block;
+  border-radius: 24px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  min-height: 220px;
+  background: #e8ddd0;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  inset: 0;
+  transition: transform 0.6s ease;
+}
+
+.card:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.cardPlaceholder {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  background: #e8ddd0;
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.15) 50%,
+    transparent 100%
+  );
+  transition: background 0.4s ease;
+}
+
+.card:hover .cardOverlay {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    transparent 100%
+  );
+}
+
+.cardTitle {
+  margin: 0 0 4px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.cardDescription {
+  margin: 0;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+}
+
+.cardCount {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  width: fit-content;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .card {
+    min-height: 280px;
+    border-radius: 28px;
+  }
+
+  .cardTitle {
+    font-size: 24px;
+  }
+
+  .cardDescription {
+    font-size: 15px;
+  }
+
+  .cardOverlay {
+    padding: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    gap: 24px;
+  }
+
+  .card {
+    min-height: 340px;
+    border-radius: 32px;
+  }
+
+  .cardTitle {
+    font-size: 28px;
+  }
+
+  .cardOverlay {
+    padding: 32px;
+  }
+}

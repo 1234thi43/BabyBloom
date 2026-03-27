@@ -267,6 +267,274 @@
   letter-spacing: 0.02em;
 }
 
+.studioSection {
+  width: 100%;
+  padding: 0 14px 8px;
+}
+
+.studioGlass {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 18px 16px;
+  border-radius: 24px;
+  background: radial-gradient(circle at top left, rgba(249, 243, 236, 0.9), rgba(245, 239, 230, 0.85))
+      padding-box,
+    linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(201, 168, 130, 0.6)) border-box;
+  border: 1px solid transparent;
+  backdrop-filter: blur(26px);
+  -webkit-backdrop-filter: blur(26px);
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.6);
+  transition: all 0.4s ease;
+}
+
+.studioGlass:hover {
+  box-shadow:
+    0 18px 52px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.75);
+}
+
+.studioInner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.studioHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+
+.studioTitle {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #3d3530;
+}
+
+.studioIntro {
+  margin: 0 auto;
+  max-width: 42rem;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #8c7b6e;
+}
+
+.studioList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+.studioItem {
+  padding: 12px 13px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.studioItemTitle {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #3d3530;
+}
+
+.studioItemText {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #8c7b6e;
+}
+
+/* --- Секция Услуги: карточки Liquid Glass --- */
+.servicesSection {
+  width: 100%;
+  padding: 0 14px 8px;
+}
+
+.servicesInner {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.servicesTitle {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #3d3530;
+}
+
+.servicesSubtitle {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #8c7b6e;
+  max-width: 520px;
+}
+
+.servicesGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  margin-top: 8px;
+}
+
+/* Карточка услуги: Liquid Glass */
+.serviceCard {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(250, 247, 244, 0.2) 100%
+  );
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: all 0.4s ease;
+  animation: glassGlow 6s ease-in-out infinite;
+  display: flex;
+  flex-direction: column;
+}
+
+.serviceCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: glassShine 5s ease-in-out infinite;
+  z-index: 1;
+}
+
+.serviceCard:hover {
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.serviceCardImageWrap {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  min-height: 180px;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+  background: #e8ddd0;
+}
+
+.serviceCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.serviceCard:hover .serviceCardImage {
+  transform: scale(1.05);
+}
+
+.serviceCardContent {
+  padding: 16px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.serviceCardTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #3d3530;
+}
+
+.serviceCardPrice {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #c9a882;
+}
+
+.serviceCardDescription {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #8c7b6e;
+}
+
+.serviceCardButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  margin-top: 10px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 168, 130, 0.6);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  color: #3d3530;
+  background: linear-gradient(135deg, #f5efe6 0%, #e8ddd0 45%, #c9a882 100%);
+  box-shadow: 0 8px 20px rgba(201, 168, 130, 0.35);
+  transition:
+    transform 150ms ease-out,
+    box-shadow 150ms ease-out,
+    filter 150ms ease-out;
+}
+
+.serviceCardButton:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(201, 168, 130, 0.5);
+  filter: brightness(1.04);
+}
+
 @media (min-width: 768px) {
   .page {
     gap: 64px;
@@ -335,6 +603,84 @@
     font-size: 16px;
   }
 
+  .studioSection {
+    padding: 0 24px 10px;
+  }
+
+  .studioGlass {
+    padding: 22px 22px;
+    border-radius: 28px;
+  }
+
+  .studioInner {
+    gap: 24px;
+  }
+
+  .studioHeader {
+    gap: 12px;
+  }
+
+  .studioTitle {
+    font-size: 26px;
+  }
+
+  .studioIntro {
+    font-size: 15px;
+  }
+
+  .studioList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .studioItem {
+    padding: 14px 15px;
+  }
+
+  .studioItemTitle {
+    font-size: 15px;
+  }
+
+  .studioItemText {
+    font-size: 13px;
+  }
+
+  .servicesSection {
+    padding: 0 24px 10px;
+  }
+
+  .servicesInner {
+    gap: 24px;
+  }
+
+  .servicesTitle {
+    font-size: 26px;
+  }
+
+  .servicesSubtitle {
+    font-size: 15px;
+  }
+
+  .servicesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .serviceCardContent {
+    padding: 18px 16px 20px;
+  }
+
+  .serviceCardTitle {
+    font-size: 17px;
+  }
+
+  .serviceCardPrice {
+    font-size: 16px;
+  }
+
+  .serviceCardDescription {
+    font-size: 14px;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -362,6 +708,11 @@
 
   .statsLabel {
     font-size: 15px;
+  }
+
+  .servicesGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
   }
 
   .heroGlass {

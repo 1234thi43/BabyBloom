@@ -15,7 +15,7 @@ const MenuLinks: FC<{ onNavigate: () => void }> = ({ onNavigate }) => (
       Портфолио
     </NavLink>
     <NavLink to="/info" className={(opt) => navLinkClass(opt, styles.navLink)} onClick={onNavigate}>
-      Инфо
+      Услуги и стоимость
     </NavLink>
     <NavLink to="/contacts" className={(opt) => navLinkClass(opt, styles.navLink)} onClick={onNavigate}>
       Контакты
@@ -23,20 +23,16 @@ const MenuLinks: FC<{ onNavigate: () => void }> = ({ onNavigate }) => (
   </>
 )
 
+const LOGO_SRC = '/images/logo/baby-bloom-logo-without-background.png'
+
 const LogoIcon: FC = () => (
-  <svg
+  <img
     className={styles.logoIcon}
-    viewBox="0 0 40 40"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden
-  >
-    <circle cx="20" cy="22" r="10" fill="#C9A882" opacity="0.9" />
-    <ellipse cx="20" cy="14" rx="6" ry="8" fill="#E8DDD0" />
-    <circle cx="18" cy="12" r="1.5" fill="#8C7B6E" />
-    <circle cx="22" cy="12" r="1.5" fill="#8C7B6E" />
-    <path d="M17 18 Q20 16 23 18" stroke="#8C7B6E" strokeWidth="1" fill="none" strokeLinecap="round" />
-  </svg>
+    src={LOGO_SRC}
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
 )
 
 const Header: FC = () => {
