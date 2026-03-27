@@ -1,7 +1,9 @@
 import type { FC } from 'react'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import GalleryPreview from '../../components/sections/GalleryPreview'
+import { SERVICE_CATEGORIES, type ServiceCategoryConfig } from '../../data/servicesConfig'
 import styles from './Home.module.css'
 
 const statsItems = [
@@ -37,12 +39,70 @@ const STUDIO_FEATURES = [
   },
 ] as const
 
-const SERVICE_HIGHLIGHTS = [
-  { title: 'Newborn', description: 'от 220 бел. руб.' },
-  { title: 'Детки до года', description: 'от 180 бел. руб.' },
-  { title: 'Годики', description: 'от 200 бел. руб.' },
-  { title: 'Семьи', description: 'от 200 бел. руб.' },
-] as const
+interface ServiceCardCopy {
+  badge: string
+  teaser: string
+}
+
+interface ServiceHighlight {
+  slug: string
+  title: string
+  price: string
+  image: string
+  badge: string
+  teaser: string
+}
+
+const SERVICE_CARD_COPY: Record<string, ServiceCardCopy> = {
+  newborn: {
+    badge: 'Первые дни жизни',
+    teaser: 'Нежная съёмка малыша в безопасной и тёплой студии.',
+  },
+  'less-than-one-year': {
+    badge: '1-11 месяцев',
+    teaser: 'Живые эмоции, любимые улыбки и бережная съёмка всей семьи.',
+  },
+  'one-year': {
+    badge: 'Первый день рождения',
+    teaser: 'Праздничные кадры, торт, шары и яркие эмоции в одном пакете.',
+  },
+  familys: {
+    badge: 'Тёплые семейные истории',
+    teaser: 'Кадры для двоих, с детьми или в ожидании малыша без лишней суеты.',
+  },
+}
+
+function extractPriceValue(price: string): number {
+  const normalizedPrice = Number.parseInt(price.replace(/[^\d]/g, ''), 10)
+
+  return Number.isNaN(normalizedPrice) ? Number.MAX_SAFE_INTEGER : normalizedPrice
+}
+
+function getStartingPrice(category: ServiceCategoryConfig): string {
+  const lowestPack = category.packs.reduce((lowestPricePack, currentPack) => {
+    return extractPriceValue(currentPack.price) < extractPriceValue(lowestPricePack.price)
+      ? currentPack
+      : lowestPricePack
+  })
+
+  return `от ${lowestPack.price}`
+}
+
+const SERVICE_HIGHLIGHTS: ServiceHighlight[] = SERVICE_CATEGORIES.map((category) => {
+  const cardCopy = SERVICE_CARD_COPY[category.slug] ?? {
+    badge: 'Пакеты и цены',
+    teaser: category.description,
+  }
+
+  return {
+    slug: category.slug,
+    title: category.title,
+    price: getStartingPrice(category),
+    image: category.coverImage,
+    badge: cardCopy.badge,
+    teaser: cardCopy.teaser,
+  }
+})
 
 const Home: FC = () => {
   const heroRef = useRef<HTMLElement | null>(null)
@@ -226,28 +286,31 @@ const Home: FC = () => {
         aria-labelledby="services-title"
       >
         <div className={styles.servicesInner}>
-          <motion.h2
-            id="services-title"
-            className={styles.servicesTitle}
+          <motion.div
+            className={styles.servicesHeader}
             initial={{ opacity: 0, y: 12 }}
             animate={isServicesInView ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            Виды съёмок
-          </motion.h2>
-          <motion.p
-            className={styles.servicesSubtitle}
-            initial={{ opacity: 0, y: 12 }}
-            animate={isServicesInView ? { opacity: 1, y: 0 } : undefined}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
-          >
-            Подберите пакет фотосессии под ваши пожелания и бюджет
-          </motion.p>
-          <div className={styles.servicesGrid}>
+            <span className={styles.servicesEyebrow}>
+              {SERVICE_HIGHLIGHTS.length} направления съёмки
+            </span>
+            <h2 id="services-title" className={styles.servicesTitle}>
+              Виды съёмок
+            </h2>
+            <p className={styles.servicesSubtitle}>
+              Выберите формат, который подходит вашей семье, и сразу перейдите к пакетам и
+              стоимости.
+            </p>
+            <p className={styles.servicesLead}>
+              На странице услуг вас ждут подробные пакеты, примеры съёмок и актуальные цены.
+            </p>
+          </motion.div>
+
+          <ul className={styles.servicesGrid} role="list">
             {SERVICE_HIGHLIGHTS.map((item, index) => (
-              <motion.div
-                key={item.title}
-                className={styles.serviceHighlight}
+              <motion.li
+                key={item.slug}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isServicesInView ? { opacity: 1, y: 0 } : undefined}
                 transition={{
@@ -256,20 +319,44 @@ const Home: FC = () => {
                   delay: 0.12 + index * 0.08,
                 }}
               >
-                <h3 className={styles.serviceHighlightTitle}>{item.title}</h3>
-                <p className={styles.serviceHighlightPrice}>{item.description}</p>
-              </motion.div>
+                <Link to={`/services/${item.slug}`} className={styles.serviceCard}>
+                  <div className={styles.serviceCardImageWrap}>
+                    <img
+                      src={item.image}
+                      alt={`${item.title} фотосессия Baby Bloom`}
+                      loading="lazy"
+                      className={styles.serviceCardImage}
+                    />
+                  </div>
+                  <div className={styles.serviceCardContent}>
+                    <div className={styles.servicesMeta}>
+                      <span className={styles.servicesMetaText}>{item.badge}</span>
+                      <span className={styles.serviceCardPrice}>{item.price}</span>
+                    </div>
+                    <h3 className={styles.serviceCardTitle}>{item.title}</h3>
+                    <p className={styles.serviceCardDescription}>{item.teaser}</p>
+                    <span className={styles.serviceCardCta}>
+                      Смотреть пакет
+                      <span className={styles.serviceCardArrow} aria-hidden="true">
+                        →
+                      </span>
+                    </span>
+                  </div>
+                </Link>
+              </motion.li>
             ))}
-          </div>
-          <motion.a
-            href="/services"
-            className={styles.servicesButton}
+          </ul>
+
+          <motion.div
+            className={styles.servicesFooter}
             initial={{ opacity: 0, y: 12 }}
             animate={isServicesInView ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
           >
-            Все услуги и цены
-          </motion.a>
+            <Link to="/services" className={styles.servicesButton}>
+              Смотреть все пакеты и цены
+            </Link>
+          </motion.div>
         </div>
       </section>
     </div>

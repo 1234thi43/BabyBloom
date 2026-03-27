@@ -377,6 +377,31 @@
   gap: 20px;
 }
 
+.servicesHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 700px;
+}
+
+.servicesEyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 168, 130, 0.35);
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 8px 20px rgba(201, 168, 130, 0.12);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8c7b6e;
+}
+
 .servicesTitle {
   margin: 0;
   font-size: 22px;
@@ -394,17 +419,34 @@
   max-width: 520px;
 }
 
+.servicesLead {
+  margin: 0;
+  max-width: 580px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #8c7b6e;
+}
+
 .servicesGrid {
   width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 20px;
   margin-top: 8px;
+  margin-bottom: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.servicesGrid > li {
+  height: 100%;
 }
 
 /* Карточка услуги: Liquid Glass */
 .serviceCard {
   position: relative;
+  width: 100%;
+  height: 100%;
   border-radius: 20px;
   overflow: hidden;
   background: linear-gradient(
@@ -424,6 +466,8 @@
   animation: glassGlow 6s ease-in-out infinite;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  isolation: isolate;
 }
 
 .serviceCard::before {
@@ -448,12 +492,19 @@
   z-index: 1;
 }
 
-.serviceCard:hover {
+.serviceCard:hover,
+.serviceCard:focus-visible {
   border-color: rgba(255, 255, 255, 0.55);
   box-shadow:
     0 16px 48px rgba(0, 0, 0, 0.12),
     0 0 0 1px rgba(255, 255, 255, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transform: translateY(-4px);
+}
+
+.serviceCard:focus-visible {
+  outline: 2px solid rgba(201, 168, 130, 0.85);
+  outline-offset: 3px;
 }
 
 .serviceCardImageWrap {
@@ -472,7 +523,8 @@
   transition: transform 0.6s ease;
 }
 
-.serviceCard:hover .serviceCardImage {
+.serviceCard:hover .serviceCardImage,
+.serviceCard:focus-visible .serviceCardImage {
   transform: scale(1.05);
 }
 
@@ -480,8 +532,33 @@
   padding: 16px 14px 18px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
   text-align: left;
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.servicesMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.servicesMetaText {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(245, 239, 230, 0.85);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #8c7b6e;
 }
 
 .serviceCardTitle {
@@ -506,33 +583,76 @@
   color: #8c7b6e;
 }
 
-.serviceCardButton {
+.serviceCardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  margin-top: auto;
+  padding-top: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #3d3530;
+}
+
+.serviceCardArrow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
-  margin-top: 10px;
-  padding: 10px 16px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(245, 239, 230, 0.9);
+  color: #c9a882;
+  transition: transform 150ms ease-out;
+}
+
+.serviceCard:hover .serviceCardArrow,
+.serviceCard:focus-visible .serviceCardArrow {
+  transform: translateX(3px);
+}
+
+.servicesFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.servicesButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 320px;
+  min-height: 48px;
+  padding: 14px 22px;
   border-radius: 999px;
   border: 1px solid rgba(201, 168, 130, 0.6);
   text-decoration: none;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  cursor: pointer;
+  letter-spacing: 0.03em;
   color: #3d3530;
   background: linear-gradient(135deg, #f5efe6 0%, #e8ddd0 45%, #c9a882 100%);
-  box-shadow: 0 8px 20px rgba(201, 168, 130, 0.35);
+  box-shadow: 0 12px 28px rgba(201, 168, 130, 0.25);
   transition:
     transform 150ms ease-out,
     box-shadow 150ms ease-out,
     filter 150ms ease-out;
 }
 
-.serviceCardButton:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 12px 28px rgba(201, 168, 130, 0.5);
-  filter: brightness(1.04);
+.servicesButton:hover,
+.servicesButton:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(201, 168, 130, 0.35);
+  filter: brightness(1.03);
+}
+
+.servicesButton:focus-visible {
+  outline: 2px solid rgba(201, 168, 130, 0.85);
+  outline-offset: 3px;
 }
 
 @media (min-width: 768px) {
@@ -653,12 +773,24 @@
     gap: 24px;
   }
 
+  .servicesHeader {
+    gap: 12px;
+  }
+
+  .servicesEyebrow {
+    font-size: 13px;
+  }
+
   .servicesTitle {
     font-size: 26px;
   }
 
   .servicesSubtitle {
     font-size: 15px;
+  }
+
+  .servicesLead {
+    font-size: 14px;
   }
 
   .servicesGrid {
@@ -680,6 +812,12 @@
 
   .serviceCardDescription {
     font-size: 14px;
+  }
+
+  .servicesButton {
+    width: auto;
+    padding: 15px 28px;
+    font-size: 15px;
   }
 }
 
@@ -715,6 +853,22 @@
     gap: 24px;
   }
 
+  .servicesHeader {
+    max-width: 760px;
+  }
+
+  .servicesTitle {
+    font-size: 32px;
+  }
+
+  .servicesSubtitle {
+    font-size: 16px;
+  }
+
+  .servicesLead {
+    font-size: 14px;
+  }
+
   .heroGlass {
     padding: 8px;
     border-radius: 32px;
@@ -745,4 +899,18 @@
     gap: 20px;
   }
 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .serviceCard,
+  .serviceCard::before {
+    animation: none;
+  }
+
+  .serviceCard,
+  .serviceCardImage,
+  .serviceCardArrow,
+  .servicesButton {
+    transition: none;
+  }
 }

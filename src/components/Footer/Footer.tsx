@@ -2,7 +2,6 @@ import type { FC } from 'react'
 import styles from './Footer.module.css'
 
 const PHONE_DISPLAY = '+375 (29) 796-52-76'
-const PHONE_HREF = 'tel:+375297965276'
 const EMAIL = 'natashabystrova082@gmail.com'
 
 const Footer: FC = () => {
@@ -41,9 +40,7 @@ const Footer: FC = () => {
         <div className={styles.authorColumn}>
           <span className={styles.socialTitle}>Фотограф Наталья Быстрова</span>
           <div className={styles.contacts}>
-            <a className={styles.contactLink} href={PHONE_HREF}>
-              {PHONE_DISPLAY}
-            </a>
+            <span className={styles.contactLink}>{PHONE_DISPLAY}</span>
             <a className={styles.contactLink} href={`mailto:${EMAIL}`}>
               {EMAIL}
             </a>
