@@ -1,11 +1,314 @@
-.title {
-  margin: 0;
-  font-size: 24px;
+.page {
+  position: relative;
+  display: grid;
+  gap: 24px;
+  color: #3d3530;
+}
+
+.page > * {
+  position: relative;
+  z-index: 1;
+}
+
+.heroGlass,
+.methodCard,
+.methodCardStatic {
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(255, 255, 255, 0.26) 50%,
+    rgba(245, 239, 230, 0.35) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.hero {
+  padding-top: 8px;
+}
+
+.heroGlass {
+  border-radius: 28px;
+  padding: 24px 18px;
+}
+
+.heroContent {
+  display: grid;
+  gap: 16px;
+}
+
+.heroLead,
+.heroAside {
+  display: grid;
+  gap: 16px;
+}
+
+.heroDivider {
+  width: 100%;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(201, 168, 130, 0) 0%,
+    rgba(201, 168, 130, 0.62) 50%,
+    rgba(201, 168, 130, 0) 100%
+  );
+  transform-origin: center;
+}
+
+.heroBadge,
+.sectionEyebrow,
+.methodAccent {
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 12px;
   font-weight: 700;
 }
 
+.heroBadge,
+.sectionEyebrow,
+.methodAccent {
+  color: #8c7b6e;
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.12;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.subtitle,
+.sectionText,
+.methodSubtitle,
+.methodHint {
+  margin: 0;
+  color: #5c524b;
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.button {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 18px;
+  border-radius: 18px;
+  text-decoration: none;
+  font-weight: 600;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    color 0.4s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button:focus-visible,
+.methodCard:focus-visible {
+  outline: 2px solid #c9a882;
+  outline-offset: 3px;
+}
+
+.buttonPrimary {
+  background: #c9a882;
+  color: #fff;
+  box-shadow: 0 14px 32px rgba(201, 168, 130, 0.24);
+}
+
+.buttonPrimary:hover {
+  background: #b99672;
+}
+
+.buttonSecondary {
+  border: 1px solid rgba(201, 168, 130, 0.45);
+  color: #3d3530;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.buttonSecondary:hover {
+  border-color: rgba(201, 168, 130, 0.7);
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.factsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.factPill {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  color: #5c524b;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.section {
+  display: grid;
+  gap: 18px;
+}
+
+.sectionHeader {
+  display: grid;
+  gap: 6px;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.methodsGrid {
+  display: grid;
+  gap: 16px;
+}
+
+.methodCard {
+  display: grid;
+  gap: 10px;
+  padding: 18px 16px;
+  border-radius: 24px;
+  text-decoration: none;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.methodCardStatic {
+  cursor: default;
+}
+
+.methodCard:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.methodCardStatic:hover {
+  transform: none;
+}
+
+.methodIcon {
+  width: 52px;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.52);
+  color: #c9a882;
+}
+
+.methodIconSvg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.methodTitle {
+  font-size: 18px;
+  line-height: 1.3;
+}
+
 @media (min-width: 768px) {
+  .page {
+    gap: 28px;
+  }
+
+  .heroGlass {
+    padding: 32px 28px;
+    border-radius: 32px;
+  }
+
+  .heroContent {
+    grid-template-columns: minmax(0, 1fr) 1px minmax(320px, 0.92fr);
+    align-items: center;
+    gap: 28px;
+  }
+
   .title {
-    font-size: 28px;
+    font-size: 36px;
+    max-width: 14ch;
+  }
+
+  .subtitle {
+    max-width: 56ch;
+  }
+
+  .actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .heroDivider {
+    width: 1px;
+    height: 100%;
+    min-height: 180px;
+    background: linear-gradient(
+      180deg,
+      rgba(201, 168, 130, 0) 0%,
+      rgba(201, 168, 130, 0.62) 50%,
+      rgba(201, 168, 130, 0) 100%
+    );
+  }
+
+  .methodsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .methodCard {
+    padding: 24px;
+  }
+
+  .sectionTitle {
+    font-size: 26px;
+  }
+
+}
+
+@media (min-width: 1024px) {
+  .page {
+    gap: 32px;
+  }
+
+  .heroGlass {
+    padding: 40px;
+  }
+
+  .heroContent {
+    max-width: none;
+  }
+
+  .title {
+    font-size: 44px;
+  }
+
+  .methodsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
