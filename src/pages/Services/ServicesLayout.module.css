@@ -1,0 +1,130 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #3d3530;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.subtitle {
+  margin: 0;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #8c7b6e;
+  text-align: center;
+  max-width: 520px;
+}
+
+/* На узких экранах — сетка 2×2, все категории в зоне видимости без скролла */
+.nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 4px 0;
+  box-sizing: border-box;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  padding: 10px 10px;
+  border-radius: 999px;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #3d3530;
+  background: transparent;
+  border: 1px solid rgba(201, 168, 130, 0.3);
+  box-shadow: none;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.25;
+  min-height: var(--touch-min, 44px);
+}
+
+.pill:hover {
+  background: rgba(201, 168, 130, 0.1);
+  border-color: rgba(201, 168, 130, 0.5);
+}
+
+.pillActive {
+  background: rgba(201, 168, 130, 0.15);
+  border-color: rgba(201, 168, 130, 0.6);
+  color: #3d3530;
+}
+
+.content {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .section {
+    gap: 32px;
+  }
+
+  .header {
+    gap: 16px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .pill {
+    width: auto;
+    flex: 0 1 auto;
+    font-size: 15px;
+    padding: 10px 24px;
+    white-space: nowrap;
+    line-height: normal;
+  }
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: 32px;
+  }
+
+  .pill {
+    padding: 12px 28px;
+  }
+}

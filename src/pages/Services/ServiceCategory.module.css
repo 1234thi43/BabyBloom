@@ -1,0 +1,86 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.categoryHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.categoryTitle {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #3d3530;
+  letter-spacing: 0.3px;
+}
+
+.categoryDescription {
+  margin: 0;
+  font-family: "DM Sans", "Inter", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #8c7b6e;
+  max-width: 480px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+/* Одна карточка — по центру экрана на любой ширине */
+.grid[data-count="1"] {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+
+.grid[data-count="1"] > * {
+  width: 100%;
+  max-width: 460px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    gap: 32px;
+  }
+
+  .categoryTitle {
+    font-size: 24px;
+  }
+
+  .categoryDescription {
+    font-size: 15px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .categoryTitle {
+    font-size: 26px;
+  }
+}
+
+/* 3–4 колонки только на широких экранах; iPad Pro и схожие остаются в 2 колонки (правило от 768px) */
+@media (min-width: 1368px) {
+  .grid[data-count="3"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .grid[data-count="4"] {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

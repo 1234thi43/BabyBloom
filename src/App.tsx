@@ -6,7 +6,9 @@ import Home from './pages/Home/Home'
 import PortfolioLayout from './pages/Portfolio/PortfolioLayout'
 import PortfolioIndex from './pages/Portfolio/PortfolioIndex'
 import GalleryPage from './pages/Portfolio/GalleryPage'
-import Info from './pages/Info/Info'
+import ServicesLayout from './pages/Services/ServicesLayout'
+import ServicesIndex from './pages/Services/ServicesIndex'
+import ServiceCategory from './pages/Services/ServiceCategory'
 import Contacts from './pages/Contacts/Contacts'
 
 const App: FC = () => {
@@ -21,7 +23,10 @@ const App: FC = () => {
               <Route index element={<PortfolioIndex />} />
               <Route path=":category" element={<GalleryPage />} />
             </Route>
-            <Route path="/info" element={<Info />} />
+            <Route path="/services" element={<ServicesLayout />}>
+              <Route index element={<ServicesIndex />} />
+              <Route path=":category" element={<ServiceCategory />} />
+            </Route>
             <Route path="/contacts" element={<Contacts />} />
           </Routes>
         </div>

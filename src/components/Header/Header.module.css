@@ -52,12 +52,7 @@
 @media (max-width: 767px) {
   .header {
     position: relative;
-    z-index: 9999;
-  }
-
-  .logo {
-    position: relative;
-    z-index: 101;
+    z-index: 10;
   }
 }
 
@@ -143,7 +138,7 @@
   bottom: 0;
   width: 100%;
   height: 100%;
-  z-index: 9998;
+  z-index: 10000;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -182,11 +177,18 @@
   }
 }
 
+/* Только в шапке — не трогать кнопку закрытия в оверлее (ей нужен position: absolute) */
+.overlayClose {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top, 0px));
+  right: max(16px, env(safe-area-inset-right, 0px));
+  z-index: 1;
+}
+
 @media (max-width: 767px) {
-  .burger {
+  .headerInner .burger {
     display: flex;
     position: relative;
-    z-index: 9999;
   }
 
   .navOverlay .navLink {

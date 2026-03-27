@@ -14,7 +14,7 @@ const MenuLinks: FC<{ onNavigate: () => void }> = ({ onNavigate }) => (
     <NavLink to="/portfolio" className={(opt) => navLinkClass(opt, styles.navLink)} onClick={onNavigate}>
       Портфолио
     </NavLink>
-    <NavLink to="/info" className={(opt) => navLinkClass(opt, styles.navLink)} onClick={onNavigate}>
+    <NavLink to="/services" className={(opt) => navLinkClass(opt, styles.navLink)} onClick={onNavigate}>
       Услуги и стоимость
     </NavLink>
     <NavLink to="/contacts" className={(opt) => navLinkClass(opt, styles.navLink)} onClick={onNavigate}>
@@ -76,7 +76,20 @@ const Header: FC = () => {
           <nav
             className={`${styles.navOverlay} ${menuOpen ? styles.navOpen : ''}`}
             aria-hidden={!menuOpen}
+            aria-label="Мобильное меню"
           >
+            {menuOpen ? (
+              <button
+                type="button"
+                className={`${styles.burger} ${styles.burgerOpen} ${styles.overlayClose}`}
+                onClick={closeMenu}
+                aria-label="Закрыть меню"
+              >
+                <span className={styles.burgerLine} />
+                <span className={styles.burgerLine} />
+                <span className={styles.burgerLine} />
+              </button>
+            ) : null}
             <MenuLinks onNavigate={closeMenu} />
           </nav>,
           document.body

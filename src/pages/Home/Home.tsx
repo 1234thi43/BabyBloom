@@ -37,35 +37,11 @@ const STUDIO_FEATURES = [
   },
 ] as const
 
-const servicePacks = [
-  {
-    id: 'cocoon',
-    title: 'КОКОН',
-    price: '220 бел. руб.',
-    description: 'Короткая уютная съёмка в образе «кокон» — нежные кадры новорождённого в пелёнках и шапочках. Идеально для первых воспоминаний.',
-    image: '/images/price/cocoon.webp',
-  },
-  {
-    id: 'mini-plus',
-    title: 'МИНИ +',
-    price: '300 бел. руб.',
-    description: 'Расширенный мини-пакет: несколько образов, работа с реквизитом и мягким светом. Больше кадров и эмоций в одной съёмке.',
-    image: '/images/price/mini-plus.webp',
-  },
-  {
-    id: 'standard',
-    title: 'СТАНДАРТ',
-    price: '400 бел. руб.',
-    description: 'Полноценная студийная съёмка с несколькими сетами, смена образов и реквизита. Подходит для создания целой серии кадров.',
-    image: '/images/price/standard.webp',
-  },
-  {
-    id: 'premium',
-    title: 'ПРЕМИУМ',
-    price: '550 бел. руб.',
-    description: 'Максимальный пакет: продолжительная съёмка, все образы и локации студии, приоритетная обработка и расширенная галерея.',
-    image: '/images/price/premium.webp',
-  },
+const SERVICE_HIGHLIGHTS = [
+  { title: 'Newborn', description: 'от 220 бел. руб.' },
+  { title: 'Детки до года', description: 'от 180 бел. руб.' },
+  { title: 'Годики', description: 'от 200 бел. руб.' },
+  { title: 'Семьи', description: 'от 200 бел. руб.' },
 ] as const
 
 const Home: FC = () => {
@@ -265,13 +241,13 @@ const Home: FC = () => {
             animate={isServicesInView ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
           >
-            Выберите пакет фотосессии под ваши желания и бюджет — от короткой съёмки «Кокон» до полноценного премиум-формата.
+            Подберите пакет фотосессии под ваши пожелания и бюджет
           </motion.p>
           <div className={styles.servicesGrid}>
-            {servicePacks.map((pack, index) => (
-              <motion.article
-                key={pack.id}
-                className={styles.serviceCard}
+            {SERVICE_HIGHLIGHTS.map((item, index) => (
+              <motion.div
+                key={item.title}
+                className={styles.serviceHighlight}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isServicesInView ? { opacity: 1, y: 0 } : undefined}
                 transition={{
@@ -280,31 +256,20 @@ const Home: FC = () => {
                   delay: 0.12 + index * 0.08,
                 }}
               >
-                <div className={styles.serviceCardImageWrap}>
-                  <img
-                    src={pack.image}
-                    alt={`Фотосессия: ${pack.title}`}
-                    loading="lazy"
-                    className={styles.serviceCardImage}
-                    onError={(e) => {
-                      const target = e.currentTarget
-                      if (target.dataset.fallback) return
-                      target.dataset.fallback = '1'
-                      target.src = 'https://images.pexels.com/photos/3933272/pexels-photo-3933272.jpeg?auto=compress&cs=tinysrgb&w=800'
-                    }}
-                  />
-                </div>
-                <div className={styles.serviceCardContent}>
-                  <h3 className={styles.serviceCardTitle}>{pack.title}</h3>
-                  <p className={styles.serviceCardPrice}>{pack.price}</p>
-                  <p className={styles.serviceCardDescription}>{pack.description}</p>
-                  <a href="/contacts" className={styles.serviceCardButton}>
-                    Записаться на съёмку
-                  </a>
-                </div>
-              </motion.article>
+                <h3 className={styles.serviceHighlightTitle}>{item.title}</h3>
+                <p className={styles.serviceHighlightPrice}>{item.description}</p>
+              </motion.div>
             ))}
           </div>
+          <motion.a
+            href="/services"
+            className={styles.servicesButton}
+            initial={{ opacity: 0, y: 12 }}
+            animate={isServicesInView ? { opacity: 1, y: 0 } : undefined}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+          >
+            Все услуги и цены
+          </motion.a>
         </div>
       </section>
     </div>
